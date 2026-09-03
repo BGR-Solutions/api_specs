@@ -26,3 +26,10 @@
 - **Boas Práticas de Importação**: Sempre utilize imports relativos consistentes e evite caminhos relativos complexos. Prefira aliases configurados no TypeScript para facilitar a manutenção.
 - **Acessibilidade**: Sempre considere a acessibilidade ao criar componentes, utilizando atributos como `aria-label` e garantindo que a navegação por teclado seja possível.
 - **Internacionalização (i18n)**: Sempre que possível, utilize bibliotecas de internacionalização como `react-i18next` para suportar múltiplos idiomas no frontend.
+
+## Regras para DevOps e Docker (Monorepo):
+- **Arquitetura do Compose**: O arquivo `docker-compose.yml` deve ficar obrigatoriamente na raiz do monorepo, orquestrando os serviços de backend, frontend e banco de dados.
+- **Multi-stage Builds (Obrigatório)**: Todos os Dockerfiles devem utilizar builds de múltiplos estágios para reduzir o tamanho da imagem final.
+- **Backend (Java)**: O estágio de build deve usar uma imagem com o JDK completo para compilar, mas a imagem final deve usar apenas o JRE (preferencialmente Alpine ou Slim) para rodar o `.jar`.
+- **Frontend (React)**: O estágio de build deve usar o Node.js, mas a imagem final deve utilizar obrigatoriamente o **Nginx** para servir os arquivos estáticos compilados. Nunca utilize o servidor de desenvolvimento do Node (`npm start`) na imagem final.
+- **Segurança**: Sempre que possível, configure os contêineres para rodar com um usuário não-root.
