@@ -1,0 +1,209 @@
+openapi: 3.0.3
+info:
+  title: Family Finance API
+  version: 1.0.0
+paths:
+  /members:
+    get:
+      summary: List members
+      responses:
+        '200':
+          description: OK
+    post:
+      summary: Create member
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MembroFamiliaInput'
+      responses:
+        '201':
+          description: Created
+
+  /categories:
+    get:
+      summary: List categories
+      responses:
+        '200':
+          description: OK
+    post:
+      summary: Create category
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CategoriaInput'
+      responses:
+        '201':
+          description: Created
+
+  /expenses:
+    get:
+      summary: List expenses
+      responses:
+        '200':
+          description: OK
+    post:
+      summary: Create expense
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DespesaInput'
+      responses:
+        '201':
+          description: Created
+
+  /incomes:
+    get:
+      summary: List incomes
+      responses:
+        '200':
+          description: OK
+    post:
+      summary: Create income
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReceitaInput'
+      responses:
+        '201':
+          description: Created
+
+  /budgets:
+    get:
+      summary: List budgets
+      responses:
+        '200':
+          description: OK
+    post:
+      summary: Create budget
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrcamentoMensalInput'
+      responses:
+        '201':
+          description: Created
+
+  /summary:
+    get:
+      summary: Get financial summary for period
+      parameters:
+        - in: query
+          name: month
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: OK
+
+components:
+  schemas:
+    MembroFamiliaInput:
+      type: object
+      required:
+        - nome
+      properties:
+        nome:
+          type: string
+        apelido:
+          type: string
+        relacao:
+          type: string
+        ativo:
+          type: boolean
+
+    CategoriaInput:
+      type: object
+      required:
+        - nome
+        - tipo
+      properties:
+        nome:
+          type: string
+        tipo:
+          type: string
+          enum: [DESPESA, RECEITA]
+        descricao:
+          type: string
+        ativo:
+          type: boolean
+
+    DespesaInput:
+      type: object
+      required:
+        - categoriaId
+        - membroFamiliaId
+        - descricao
+        - valor
+        - dataOcorrencia
+      properties:
+        categoriaId:
+          type: string
+          format: uuid
+        membroFamiliaId:
+          type: string
+          format: uuid
+        descricao:
+          type: string
+        valor:
+          type: number
+          format: double
+        dataOcorrencia:
+          type: string
+          format: date
+        observacoes:
+          type: string
+        recorrente:
+          type: boolean
+        formaPagamento:
+          type: string
+
+    ReceitaInput:
+      type: object
+      required:
+        - categoriaId
+        - origem
+        - valor
+        - dataRecebimento
+      properties:
+        categoriaId:
+          type: string
+          format: uuid
+        origem:
+          type: string
+        valor:
+          type: number
+          format: double
+        dataRecebimento:
+          type: string
+          format: date
+        observacoes:
+          type: string
+        recorrente:
+          type: boolean
+
+    OrcamentoMensalInput:
+      type: object
+      required:
+        - categoriaId
+        - periodo
+        - valorPlanejado
+      properties:
+        categoriaId:
+          type: string
+          format: uuid
+        periodo:
+          type: string
+        valorPlanejado:
+          type: number
+          format: double
