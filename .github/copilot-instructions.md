@@ -1,5 +1,10 @@
-# Diretrizes de Desenvolvimento (Spec-Driven Development)
+# Diretrizes de Desenvolvimento (Spec-Driven Development) para Monorepo
 
+## Regras Globais
+- Siga rigorosamente as especificações descritas nos arquivos spec.md.
+- **Entenda o contexto**: se estiver trabalhando na pasta /backend, aplique as regras de Java; na pasta /frontend, aplique TypeScript.
+
+## Regras do Backend (Java/Spring Boot)
 - **Proibição de Lombok**: É estritamente proibido importar ou utilizar qualquer anotação do Lombok (ex: `@Data`, `@Getter`, `@Builder`, `@RequiredArgsConstructor`).
 - **Encapsulamento e Construtores**: Todas as entidades e DTOs devem ter atributos privados, conter métodos get e set explícitos e construtores gerados linha a linha.
 - **Injeção de Dependência**: Nas classes `@Service` e `@RestController`, utilize apenas injeção via construtor escrito manualmente. Não utilize `@Autowired` em atributos (Field Injection).
@@ -8,3 +13,16 @@
 - **Testes Unitários (Padrão AAA)**: Siga rigorosamente o formato Arrange, Act e Assert.
 - **Isolamento de Testes**: Use `@WebMvcTest` para testar controladores. Para regras de negócio, use apenas JUnit 5 e Mockito. A criação de testes que acessem o banco de dados real é proibida.
 - **Estratégia Abrangente de Testes**: Todo endpoint criado deve obrigatoriamente incluir Testes de Caixa Branca (unitários isolados com Mockito na camada de Serviço focados em caminhos lógicos) e Testes de Caixa Preta (testes no Controlador validando exclusivamente o contrato HTTP, payloads de entrada e códigos de status de saída).
+
+## Regras do Frontend (TypeScript/React)
+- **Uso de Tipagem Estrita**: O uso do tipo any é rigorosamente proibido. Sempre utilize tipos explícitos para variáveis, funções e componentes.
+- **Separação de Camadas**: A lógica de requisições à API (ex: uso do `fetch` ou `axios`) deve ficar isolada em serviços, e não misturada nos componentes visuais.
+- **Componentes Funcionais**: Prefira componentes funcionais com hooks ao invés de classes.
+- **Gerenciamento de Estado**: Utilize Context API ou bibliotecas de gerenciamento de estado como Redux ou Zustand, evitando manipulação direta do DOM.
+- **Validação de Props**: Utilize `PropTypes` ou interfaces TypeScript para validar as props dos componentes.
+- **Testes Unitários**: Utilize Jest e React Testing Library para criar testes unitários e de integração. Siga o padrão AAA (Arrange, Act, Assert).
+- **Estilo de Código**: Siga as regras definidas no arquivo de configuração do ESLint e Prettier do projeto.
+- **Organização de Pastas**: Mantenha uma estrutura de pastas clara e consistente, separando componentes, páginas, hooks, contextos e estilos de forma lógica.
+- **Boas Práticas de Importação**: Sempre utilize imports relativos consistentes e evite caminhos relativos complexos. Prefira aliases configurados no TypeScript para facilitar a manutenção.
+- **Acessibilidade**: Sempre considere a acessibilidade ao criar componentes, utilizando atributos como `aria-label` e garantindo que a navegação por teclado seja possível.
+- **Internacionalização (i18n)**: Sempre que possível, utilize bibliotecas de internacionalização como `react-i18next` para suportar múltiplos idiomas no frontend.
