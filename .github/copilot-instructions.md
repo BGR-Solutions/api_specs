@@ -33,3 +33,9 @@
 - **Backend (Java)**: O estágio de build deve usar uma imagem com o JDK completo para compilar, mas a imagem final deve usar apenas o JRE (preferencialmente Alpine ou Slim) para rodar o `.jar`.
 - **Frontend (React)**: O estágio de build deve usar o Node.js, mas a imagem final deve utilizar obrigatoriamente o **Nginx** para servir os arquivos estáticos compilados. Nunca utilize o servidor de desenvolvimento do Node (`npm start`) na imagem final.
 - **Segurança**: Sempre que possível, configure os contêineres para rodar com um usuário não-root.
+
+## Regras para CI/CD:
+- **Plataforma**: Utilize exclusivamente o GitHub Actions.
+- **Execução Paralela**: Os jobs de teste do Backend (Java) e do Frontend (React) devem rodar em paralelo, e não de forma sequencial.
+- **Performance (Cache)**: Configure obrigatoriamente o cache para as dependências do Node.js e do Java para acelerar o tempo de execução do pipeline.
+- **Validação Estrita**: O pipeline deve executar o build e os testes. A esteira deve falhar (fail-fast) imediatamente se qualquer teste de caixa branca, caixa preta ou do React quebrar.
