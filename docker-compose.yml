@@ -1,0 +1,63 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: familyfinance-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-familyfinance}
+      POSTGRES_USER: ${POSTGRES_USER:-familyfinance}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-familyfinance}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - familyfinance-net
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: familyfinance-backend
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DB_URL: jdbc:postgresql://postgres:5432/${POSTGRES_DB:-familyfinance}
+      DB_USERNAME: ${POSTGRES_USER:-familyfinance}
+      DB_PASSWORD: ${POSTGRES_PASSWORD:-familyfinance}
+      DB_DRIVER_CLASS_NAME: org.postgresql.Driver
+      SERVER_PORT: ${BACKEND_PORT:-8080}
+    ports:
+      - "${BACKEND_PORT:-8080}:8080"
+    networks:
+      - familyfinance-net
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: familyfinance-frontend
+    restart: unless-stopped
+    depends_on:
+      backend:
+        condition: service_started
+    environment:
+      VITE_API_URL: http://backend:8080
+    ports:
+      - "${FRONTEND_PORT:-5173}:80"
+    networks:
+      - familyfinance-net
+
+volumes:
+  postgres_data:
+
+networks:
+  familyfinance-net:
+    driver: bridge
