@@ -10,9 +10,9 @@
 
 **Purpose**: Initialize the API project structure and shared configuration.
 
-- [ ] T001 Create backend project structure per implementation plan in backend/src/main/java/com/example/familyfinance/ and backend/src/test/java/com/example/familyfinance/
-- [ ] T002 Initialize Spring Boot project with Java 21, Spring Web, Validation, Data JPA, PostgreSQL, and test dependencies in backend/pom.xml
-- [ ] T003 [P] Configure application.yml, database settings, and base test configuration in backend/src/main/resources/application.yml and backend/src/test/resources/
+- [X] T001 Create backend project structure per implementation plan in backend/src/main/java/com/example/familyfinance/ and backend/src/test/java/com/example/familyfinance/
+- [X] T002 Initialize Spring Boot project with Java 21, Spring Web, Validation, Data JPA, PostgreSQL, and test dependencies in backend/pom.xml
+- [X] T003 [P] Configure application.yml, database settings, and base test configuration in backend/src/main/resources/application.yml and backend/src/test/resources/
 
 ---
 
@@ -22,11 +22,11 @@
 
 **⚠️ CRITICAL**: No user story implementation can begin until this phase is complete.
 
-- [ ] T004 Create base domain package structure for entity, repository, service, dto, mapper, controller, exception, and config in backend/src/main/java/com/example/familyfinance/
-- [ ] T005 [P] Implement shared error handling and validation conventions in backend/src/main/java/com/example/familyfinance/exception/
-- [ ] T006 [P] Create shared monetary validation utilities and date-range helpers in backend/src/main/java/com/example/familyfinance/application/
-- [ ] T007 Create JPA entity base model and repository contracts for MembroFamilia, Categoria, Despesa, Receita, and OrcamentoMensal in backend/src/main/java/com/example/familyfinance/domain/
-- [ ] T008 Configure database schema expectations and initial migration baseline in backend/src/main/resources/db/
+- [X] T004 Create base domain package structure for entity, repository, service, dto, mapper, controller, exception, and config in backend/src/main/java/com/example/familyfinance/
+- [X] T005 [P] Implement shared error handling and validation conventions in backend/src/main/java/com/example/familyfinance/exception/
+- [X] T006 [P] Create shared monetary validation utilities and date-range helpers in backend/src/main/java/com/example/familyfinance/application/
+- [X] T007 Create JPA entity base model and repository contracts for MembroFamilia, Categoria, Despesa, Receita, and OrcamentoMensal in backend/src/main/java/com/example/familyfinance/domain/
+- [X] T008 Configure database schema expectations and initial migration baseline in backend/src/main/resources/db/
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel.
 
@@ -40,19 +40,19 @@
 
 ### Tests for User Story 1
 
-- [ ] T009 [P] [US1] Create black-box controller test for POST /expenses in backend/src/test/java/com/example/familyfinance/controller/DespesaControllerTest.java
-- [ ] T010 [P] [US1] Create white-box service test for expense validation and monthly aggregation in backend/src/test/java/com/example/familyfinance/service/DespesaServiceTest.java
+- [X] T009 [P] [US1] Create black-box controller test for POST /expenses in backend/src/test/java/com/example/familyfinance/controller/DespesaControllerTest.java
+- [X] T010 [P] [US1] Create white-box service test for expense validation and monthly aggregation in backend/src/test/java/com/example/familyfinance/service/DespesaServiceTest.java
 
 ### Implementation for User Story 1
 
-- [ ] T011 [P] [US1] Create MembroFamilia entity and repository in backend/src/main/java/com/example/familyfinance/domain/entity/MembroFamilia.java and backend/src/main/java/com/example/familyfinance/domain/repository/MembroFamiliaRepository.java
-- [ ] T012 [P] [US1] Create Categoria entity and repository in backend/src/main/java/com/example/familyfinance/domain/entity/Categoria.java and backend/src/main/java/com/example/familyfinance/domain/repository/CategoriaRepository.java
-- [ ] T013 [P] [US1] Create Despesa entity and repository in backend/src/main/java/com/example/familyfinance/domain/entity/Despesa.java and backend/src/main/java/com/example/familyfinance/domain/repository/DespesaRepository.java
-- [ ] T014 [US1] Create DTOs and mappers for member, category, and expense create/list payloads in backend/src/main/java/com/example/familyfinance/application/dto/ and backend/src/main/java/com/example/familyfinance/application/mapper/
-- [ ] T015 [US1] Implement DespesaService with validation, category association, member association, and monthly aggregation in backend/src/main/java/com/example/familyfinance/application/service/DespesaService.java
-- [ ] T016 [US1] Implement DespesaController REST endpoints for creation and listing in backend/src/main/java/com/example/familyfinance/api/controller/DespesaController.java
-- [ ] T017 [US1] Add validation for positive value, required category, required member, and invalid dates in backend/src/main/java/com/example/familyfinance/application/service/DespesaService.java
-- [ ] T018 [US1] Add expense filtering by member, category, and period in backend/src/main/java/com/example/familyfinance/application/service/DespesaService.java
+- [X] T011 [P] [US1] Create MembroFamilia entity and repository in backend/src/main/java/com/example/familyfinance/domain/entity/MembroFamilia.java and backend/src/main/java/com/example/familyfinance/domain/repository/MembroFamiliaRepository.java
+- [X] T012 [P] [US1] Create Categoria entity and repository in backend/src/main/java/com/example/familyfinance/domain/entity/Categoria.java and backend/src/main/java/com/example/familyfinance/domain/repository/CategoriaRepository.java
+- [X] T013 [P] [US1] Create Despesa entity and repository in backend/src/main/java/com/example/familyfinance/domain/entity/Despesa.java and backend/src/main/java/com/example/familyfinance/domain/repository/DespesaRepository.java
+- [X] T014 [US1] Create DTOs and mappers for member, category, and expense create/list payloads in backend/src/main/java/com/example/familyfinance/application/dto/ and backend/src/main/java/com/example/familyfinance/application/mapper/
+- [X] T015 [US1] Implement DespesaService with validation, category association, member association, and monthly aggregation in backend/src/main/java/com/example/familyfinance/application/service/DespesaService.java
+- [X] T016 [US1] Implement DespesaController REST endpoints for creation and listing in backend/src/main/java/com/example/familyfinance/api/controller/DespesaController.java
+- [X] T017 [US1] Add validation for positive value, required category, required member, and invalid dates in backend/src/main/java/com/example/familyfinance/application/service/DespesaService.java
+- [X] T018 [US1] Add expense filtering by member, category, and period in backend/src/main/java/com/example/familyfinance/application/service/DespesaService.java
 
 **Checkpoint**: At this point, User Story 1 should be fully functional and testable independently.
 
